@@ -12,6 +12,130 @@
             height: 250px;
             object-fit: cover;
         }
+
+        /* Fade-in effect for the entire page */
+        body {
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        /* Once the page is fully loaded, set opacity to 1 */
+        body.loaded {
+            opacity: 1;
+        }
+
+        /* Fade-out effect when navigating away */
+        body.fade-out {
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+        /* From Uiverse.io by doniaskima */ 
+.btn-23,
+.btn-23 *,
+.btn-23 :after,
+.btn-23 :before,
+.btn-23:after,
+.btn-23:before {
+  border: 0 solid;
+  box-sizing: border-box;
+}
+
+.btn-23 {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-appearance: button;
+  background-color: #db4a2b;
+  background-image: none;
+  color: #fff;
+  cursor: pointer;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif,
+    Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  font-size: 100%;
+  font-weight: 900;
+  line-height: 1.5;
+  margin: 0;
+  -webkit-mask-image: -webkit-radial-gradient(#000, #fff);
+  padding: 0;
+  text-transform: uppercase;
+}
+
+.btn-23:disabled {
+  cursor: default;
+}
+
+.btn-23:-moz-focusring {
+  outline: auto;
+}
+
+.btn-23 svg {
+  display: block;
+  vertical-align: middle;
+}
+
+.btn-23 [hidden] {
+  display: none;
+}
+
+.btn-23 {
+  border-radius: 99rem;
+  border-width: 2px;
+  overflow: hidden;
+  padding: 0.8rem 3rem;
+  position: relative;
+}
+
+.btn-23 span {
+  display: grid;
+  inset: 0;
+  place-items: center;
+  position: absolute;
+  transition: opacity 0.2s ease;
+}
+
+.btn-23 .marquee {
+  --spacing: 5em;
+  --start: 0em;
+  --end: 5em;
+  -webkit-animation: marquee 1s linear infinite;
+  animation: marquee 1s linear infinite;
+  -webkit-animation-play-state: paused;
+  animation-play-state: paused;
+  opacity: 0;
+  position: relative;
+  text-shadow: #fff var(--spacing) 0, #fff calc(var(--spacing) * -1) 0,
+    #fff calc(var(--spacing) * -2) 0;
+}
+
+.btn-23:hover .marquee {
+  -webkit-animation-play-state: running;
+  animation-play-state: running;
+  opacity: 1;
+}
+
+.btn-23:hover .text {
+  opacity: 0;
+}
+
+@-webkit-keyframes marquee {
+  0% {
+    transform: translateX(var(--start));
+  }
+
+  to {
+    transform: translateX(var(--end));
+  }
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(var(--start));
+  }
+
+  to {
+    transform: translateX(var(--end));
+  }
+}
+
     </style>
 </head>
 <body>
@@ -38,16 +162,19 @@
 
     <!-- Collection Items -->
     <div class="container text-center">
-        <h1>Our Collection</h1>
+        <h1></h1>
         <div class="row justify-content-center">
             <!-- Item 1 -->
             <div class="col-md-4">
                 <div class="card mb-4">
                     <img src="item1.jpg" class="card-img-top" alt="Item 1">
                     <div class="card-body">
-                        <h5 class="card-title">Item 1</h5>
-                        <p class="card-text">$10.00</p>
-                        <button class="btn btn-dark add-to-cart">Add to Cart</button>
+                        <h5 class="card-title">Black oversized AnTyx T shirt</h5>
+                        <p class="card-text">£34.00</p>
+                        <button class="btn-23">
+                            <span class="text">Add to basket</span>
+                            <span aria-hidden="" class="marquee">ANTYX</span>
+                          </button>
                     </div>
                 </div>
             </div>
@@ -56,9 +183,12 @@
                 <div class="card mb-4">
                     <img src="item.png" class="card-img-top" alt="Item 2">
                     <div class="card-body">
-                        <h5 class="card-title">Item 2</h5>
-                        <p class="card-text">$20.00</p>
-                        <button class="btn btn-dark add-to-cart">Add to Cart</button>
+                        <h5 class="card-title">White oversized AnTyx T shirt</h5>
+                        <p class="card-text">£34.00</p>
+                        <button class="btn-23">
+                            <span class="text">Add to basket</span>
+                            <span aria-hidden="" class="marquee">ANTYX</span>
+                          </button>
                     </div>
                 </div>
             </div>
@@ -71,6 +201,23 @@
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="script.js"></script>
+    <script>
+        // When the DOM is fully loaded, apply the fade-in effect
+        document.addEventListener("DOMContentLoaded", function() {
+            document.body.classList.add('loaded');
+        });
+
+        // Apply the fade-out effect when clicking on the logo, navbar links, or buttons
+        document.querySelectorAll('.navbar-brand, .nav-link, .add-to-cart').forEach(function(element) {
+            element.addEventListener('click', function(event) {
+                event.preventDefault(); // Prevent immediate navigation
+                const targetUrl = this.getAttribute('href');
+                document.body.classList.add('fade-out');
+                setTimeout(function() {
+                    window.location.href = targetUrl;
+                }, 500); // Match this duration to the fade-out transition
+            });
+        });
+    </script>
 </body>
 </html>

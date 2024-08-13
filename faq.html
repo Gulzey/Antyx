@@ -6,6 +6,24 @@
     <title>FAQ</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Fade-in effect for the entire page */
+        body {
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        /* Once the page is fully loaded, set opacity to 1 */
+        body.loaded {
+            opacity: 1;
+        }
+
+        /* Fade-out effect when navigating away */
+        body.fade-out {
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+    </style>
 </head>
 <body>
     <!-- Navbar -->
@@ -44,4 +62,32 @@
                 <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#faqAccordion">
                     <div class="card-body">
                         Answer to question 1.
-        
+                    </div>
+                </div>
+            </div>
+            <!-- Add more FAQ items similarly -->
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        // When the DOM is fully loaded, apply the fade-in effect
+        document.addEventListener("DOMContentLoaded", function() {
+            document.body.classList.add('loaded');
+        });
+
+        // Apply the fade-out effect when clicking on the logo, navbar links, or buttons
+        document.querySelectorAll('.navbar-brand, .nav-link').forEach(function(element) {
+            element.addEventListener('click', function(event) {
+                event.preventDefault(); // Prevent immediate navigation
+                const targetUrl = this.getAttribute('href');
+                document.body.classList.add('fade-out');
+                setTimeout(function() {
+                    window.location.href = targetUrl;
+                }, 500); // Match this duration to the fade-out transition
+            });
+        });
+    </script>
+</body>
+</html>
