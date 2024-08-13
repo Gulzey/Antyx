@@ -1,0 +1,35 @@
+/* Global Text Color */
+body {
+    color: #db4a2b;
+}
+
+/* Navbar Links Color */
+.navbar-light .navbar-nav .nav-link,
+.navbar-light .navbar-brand {
+    color: #db4a2b;
+    font-weight: bold;
+}
+
+/* Navbar Links Hover Effect */
+.navbar-light .navbar-nav .nav-link:hover,
+.navbar-light .navbar-brand:hover {
+    color: #a73b24;
+}
+
+/* Specific styles for other elements to ensure text color is applied */
+.card-title,
+.card-text,
+h1, h2, h3, h4, h5, h6,
+label {
+    color: #db4a2b;
+    font-weight: bold;
+}
+
+/* Optional: Override Bootstrap's default link color */
+a {
+    color: #db4a2b;
+}
+
+a:hover {
+    color: #a73b24;
+}
